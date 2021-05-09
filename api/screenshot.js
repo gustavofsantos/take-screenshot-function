@@ -1,15 +1,10 @@
 const puppeteer = require("puppeteer");
-const fs = require("fs");
 
 async function takeScreenshot(url = "") {
   const encodedUrl = new URL(url);
 
   if (encodedUrl.protocol !== "https:") {
     throw new Error("The page must be secure");
-  }
-
-  if (!fs.existsSync("screenshots")) {
-    fs.mkdirSync("screenshots");
   }
 
   const browser = await puppeteer.launch({ headless: true });
