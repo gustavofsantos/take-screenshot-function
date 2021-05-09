@@ -1,6 +1,5 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
-const { promisify } = require("util");
 
 async function takeScreenshot(url = "") {
   const encodedUrl = new URL(url);
@@ -18,19 +17,16 @@ async function takeScreenshot(url = "") {
   await page.setViewport({ width: 1080, height: 1080 });
   await page.goto(url);
 
-  const path = `screenshots/${encodedUrl.hostname}.jpeg`;
-
-  await page.screenshot({ path });
+  const file = await page.screenshot();
   await browser.close();
-  return path;
+  return file;
 }
 
 // /api/screenshot?url=
 async function handler(req, res) {
   const { url } = req.query;
   const file = await takeScreenshot(url);
-  const fileBuffer = await promisify(fs.readFile)(file);
-  res.send(fileBuffer);
+  res.send(file);
 }
 
 module.exports = handler;
