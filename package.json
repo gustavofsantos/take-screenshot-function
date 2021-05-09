@@ -2,5 +2,11 @@
   "name": "take-screenshot",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^9.1.1"
+  },
+  "devDependencies": {
+    "@vercel/node": "^1.10.0"
+  }
 }
