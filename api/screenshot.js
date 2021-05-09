@@ -4,7 +4,8 @@ const { promisify } = require("util");
 
 async function takeScreenshot(url = "") {
   const encodedUrl = new URL(url);
-  if (encodedUrl.protocol !== "https") {
+
+  if (encodedUrl.protocol !== "https:") {
     throw new Error("The page must be secure");
   }
 
